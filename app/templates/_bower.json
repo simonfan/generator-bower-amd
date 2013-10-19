@@ -1,0 +1,17 @@
+{
+    "name": "<%= name.machine %>",
+    "main": "<%= name.machine %>.js",
+    "version": "0.0.0",
+
+    "dependencies": {
+    },
+
+    "devDependencies": {
+        "requirejs": "*",
+        "requirejs-text": "*",
+        "underscore": "*",
+        "jquery": "*",
+        "qunit": "*"
+    }
+}
+
