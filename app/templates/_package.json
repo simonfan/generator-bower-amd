@@ -5,6 +5,8 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-connect": "*",
-    "grunt-bower-requirejs": "*"
+    "grunt-bower-requirejs": "*",
+
+    "jsdom": "*"
   }
 }

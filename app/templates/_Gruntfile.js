@@ -37,5 +37,6 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('test', ['bower','connect:qunit']);
+    grunt.registerTask('demo', ['bower','connect']);
     grunt.registerTask('default', ['bower','connect']);
 };

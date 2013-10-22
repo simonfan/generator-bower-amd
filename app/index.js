@@ -27,7 +27,7 @@ var Generator = module.exports = function Generator(args, options, config) {
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
     this.on('end', function () {
-        this.spawnCommand('grunt', ['test']);
+        this.spawnCommand('grunt');
     }.bind(this));
 
 
@@ -253,6 +253,9 @@ Generator.prototype.devFiles = function() {
 
     this.template('_main.js', 'main.js');
     this.template('_tests.html', 'tests.html');
+
+
+    this.template('_index.html', 'index.html');
 
     // back to /
     /*
