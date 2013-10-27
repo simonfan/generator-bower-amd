@@ -11,13 +11,13 @@ var util = require('util'),
  * hash of default dependencies
  */
 var componentDefaultDependencies = {
-    'backbone.model': ['jquery','backbone'],
+    'backbone.model': ['backbone'],
     'backbone.view': ['jquery','backbone'],
-    'backbone.collection': ['jquery','backbone'],
+    'backbone.collection': ['backbone'],
     'jquery': ['jquery'],
     'underscore.mixin': ['underscore'],
 
-    'default': ['jquery','backbone'],
+    'other': [],
 };
 
 
@@ -26,21 +26,21 @@ var Generator = module.exports = function Generator(args, options, config) {
 
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
-    this.on('end', function () {
-        this.spawnCommand('grunt');
-    }.bind(this));
-
-
-    // generate a test
-    this.hookFor('bower-amd:test', {
-        as: this,
-        args: ['main']
-    });
 
     // generate a demo
     this.hookFor('bower-amd:demo', {
         args: ['main']
-    })
+    });
+
+    // generate a test
+    this.hookFor('bower-amd:qunit', {
+        args: ['base']
+    });
+
+    // run grunt when the scaffolding is finished.
+    this.on('end', function () {
+        this.spawnCommand('grunt',['bower','live']);
+    }.bind(this));
 
     /**
      * Save original source and destination roots.
@@ -114,7 +114,7 @@ Generator.prototype.askFor = function askFor() {
         type: 'input',
         message: 'What bower packages do you need? [ just as you\'d use when calling bower install ]',
         default: function(answers) {
-            return componentDefaultDependencies[answers.componentType].join(' ') || componentDefaultDependencies['default'].join(' ');
+            return componentDefaultDependencies[answers.componentType].join(' ') || componentDefaultDependencies['other'].join(' ');
         },
     });
 
@@ -226,6 +226,8 @@ Generator.prototype.rootTemplateComponent = function() {
         this.template('_component.underscore.js', this.name.machine + '.js');
 
     } else {
+
+        this.template('_component.other.js', this.name.machine + '.js');
 
     }
 

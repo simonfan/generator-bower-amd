@@ -1,1 +1,2 @@
-tests/bower_components
+node_modules
+dev/bower_components

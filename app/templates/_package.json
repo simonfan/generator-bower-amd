@@ -6,7 +6,6 @@
     "grunt": "*",
     "grunt-contrib-connect": "*",
     "grunt-bower-requirejs": "*",
-
-    "jsdom": "*"
+    "grunt-contrib-watch": "*"
   }
 }

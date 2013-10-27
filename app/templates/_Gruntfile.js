@@ -11,32 +11,55 @@ module.exports = function(grunt) {
                     hostname: 'localhost',
                     port: 8000,
                     keepalive: true,
+                    livereload: true,
                     open: 'http://localhost:8000/dev/index.html',
                 }
             },
-
-            qunit: {
-                options: {
-                    hostname: 'localhost',
-                    port: 8000,
-                    keepalive: true,
-                    open: 'http://localhost:8000/dev/tests.html',
-                }
-            }
         },
 
         bower: {
             target: {
                 rjsConfig: 'dev/main.js',
             }
+        },
+
+        watch: {
+            live: {
+                files: ['<%= name.machine %>.js','dev/tests/**','dev/demo/**'],
+                options: {
+                    livereload: true
+                }
+            },
+
+            bower: {
+                files: ['bower.json'],
+                tasks: ['bower']
+            }
         }
     });
 
+    /**
+     * Task loading
+     */
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
     grunt.loadNpmTasks('grunt-bower-requirejs');
 
 
-    grunt.registerTask('test', ['bower','connect:qunit']);
-    grunt.registerTask('demo', ['bower','connect']);
-    grunt.registerTask('default', ['bower','connect']);
+    /**
+    Auxiliary task that starts a server in a child process.
+    */
+    grunt.registerTask('child-process-server', function() {
+        // start the server on a child process
+        grunt.util.spawn({
+            cmd: 'grunt',
+            args: ['connect']
+        });
+    });
+
+    // full live
+    grunt.registerTask('live',['child-process-server','watch:live']);
+
+    grunt.registerTask('default',['bower']);
 };

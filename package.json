@@ -8,8 +8,8 @@
   "homepage": "https://github.com/simonfan/generator-bower-amd",
   "bugs": "https://github.com/simonfan/generator-bower-amd/issues",
   "author": {
-    "name": "",
-    "email": "",
+    "name": "simonfan",
+    "email": "simonxd@gmail.com",
     "url": "https://github.com/simonfan"
   },
   "main": "app/index.js",
