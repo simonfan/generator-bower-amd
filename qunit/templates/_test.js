@@ -2,7 +2,7 @@ define(['<%= componentName %>'], function(<%= _.classify(componentName.replace(/
 
 return function() {
 
-    module('<%= _.humanize(name) %>');
+    QUnit.module('<%= _.humanize(name) %>');
 
     test('<%= _.humanize(name) %>', function() {
         ok(true);
